@@ -1,0 +1,6 @@
+.wiki-content{
+text-align: start;
+}
+.wiki-content .mw-editsection {
+  display: none
+}

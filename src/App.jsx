@@ -1,19 +1,16 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Article from './Article'
 
-async function getWikipediaContent(title) {
-  const baseString = "http://localhost:5000/article/"
-  const finalString = baseString+title
-  const response = await fetch(finalString)
-  const html = await response.text()
-  return html
-}
+
 
 function App() {
   const [count, setCount] = useState(0)
-  const [articleHtml, setArticleHtml] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
+  const [articleTitle, setArticleTitle] = useState("")
+  
 
   return (
     <>
@@ -25,13 +22,13 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <div className= "wiki-content" dangerouslySetInnerHTML={{__html: articleHtml}}></div>
+      
       <h1>Vite + React</h1>
+      <Article title ={articleTitle}></Article>
       <div className="card">
-        <button onClick={() => getWikipediaContent("Albert_Einstein").then(html => setArticleHtml(html))}>
-          count is {count}
-        </button>
         
+        <input name="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}></input>
+        <button onClick={() => setArticleTitle(searchTerm)}></button>
       </div>
       
     </>
