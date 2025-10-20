@@ -7,8 +7,38 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
+def format_title(title):
+    new_title = title.replace(" ","_")
+    return new_title
+@app.route('/article/random')
+def get_random_article():
+    headers = {
+    "User-Agent": "Turbowiki-MVP/0.1 (https://yourdomain.com; contact@example.com)"
+}
+    request = requests.get(f"https://en.wikipedia.org/w/api.php", params={
+        "action": "query",
+        "list": "random",
+        "rnnamespace": "0",
+        "rnlimit": 1,
+        "format": "json",
+    
+    },
+    headers = headers)
+    data = request.json()
+    
+    title = data["query"]["random"][0]["title"]
+    print(title)
+    
+    # response = {
+    #     "title": request.text["parse"]["title"],
+    #     "html": request.text["parse"]["text"]["*"],
+    # }
+    return format_title(title)
+    
+    
+
 @app.route('/article/<title>')
-def get_current_time(title):
+def get_article(title):
     headers = {
     "User-Agent": "Turbowiki-MVP/0.1 (https://yourdomain.com; contact@example.com)"
 }
@@ -21,7 +51,7 @@ def get_current_time(title):
     },
     headers = headers)
     data = request.json()
-    print(data)
+    
     
     # response = {
     #     "title": request.text["parse"]["title"],

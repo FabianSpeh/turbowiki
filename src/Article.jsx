@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 
 function Article({title}) {
 
+
 async function getWikipediaContent(title) {
   const baseString = "http://localhost:5000/article/"
   const finalString = baseString+title
@@ -9,6 +10,7 @@ async function getWikipediaContent(title) {
   const html = await response.text()
   return html
 }
+
 
 const [articleHtml, setArticleHtml] = useState("")
 const [isLoading, setIsLoading] = useState(false)
