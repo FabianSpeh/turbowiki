@@ -10,6 +10,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [searchTerm, setSearchTerm] = useState("")
   const [startingArticleTitle, setStartingArticleTitle] = useState("")
+  const [currentArticle, setCurrentArticle] = useState("")
   const [goalArticleTitle, setGoalArticleTitle] = useState("")
   const [gameWon, setGameWon] = useState(false)
   
@@ -59,14 +60,25 @@ useEffect(() => {
   return (
     <>
     
+      <div className='main-screen'>
+        <div className='topbar'>
+          <div className='menu'>
+            
+          </div>
+          <div className='article-titles'>
+             <h1>{formatStrings(startingArticleTitle)} → {formatStrings(goalArticleTitle)}</h1>
+          </div>
+         
+        </div>
+      <div className='playing-area'>
+         <div className='sidebar'><button onClick={getTwoRandomArticles}></button></div>
+      <div className='wiki-container'>
+       
+      <Article title ={startingArticleTitle} onNavigate={setStartingArticleTitle}></Article>
+      </div>
+      </div>
+     
       
-      <h1>{formatStrings(startingArticleTitle)} → {formatStrings(goalArticleTitle)}</h1>
-      <div className='sidebar'></div>
-      <Article className="wiki-container"title ={startingArticleTitle} onNavigate={setStartingArticleTitle}></Article>
-      <div className="card">
-        
-        <input name="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}></input>
-        <button onClick={getTwoRandomArticles}></button>
       </div>
       
     </>

@@ -42,7 +42,7 @@ useEffect(() => {
             event.preventDefault();
             const newTitle = decodeURIComponent(href.replace("/wiki/",""))
             onNavigate(newTitle)
-            checkWin()
+           
 
         }
 
