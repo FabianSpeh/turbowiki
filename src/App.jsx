@@ -7,7 +7,20 @@ import Article from './Article'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+
+
+  useEffect(() => {
+    function setViewportHeight() {
+      // 1vh = 1% of the visible window height
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    }
+
+    setViewportHeight(); // run once on load
+    window.addEventListener("resize", setViewportHeight); // re-run on resize
+    return () => window.removeEventListener("resize", setViewportHeight);
+  }, []);
+  const [clickCount, setClickCount] = useState(0)
   const [searchTerm, setSearchTerm] = useState("")
   const [startingArticleTitle, setStartingArticleTitle] = useState("")
   const [currentArticle, setCurrentArticle] = useState("")
@@ -45,7 +58,9 @@ function formatStrings(title){
 
 // every time the article changes, it checks for equality to see if the player has won
 useEffect(() => {
+  
   if (startingArticleTitle && startingArticleTitle === goalArticleTitle) {
+    
     setGameWon(true);
   }
 }, [startingArticleTitle, goalArticleTitle]);
@@ -63,7 +78,7 @@ useEffect(() => {
       <div className='main-screen'>
         <div className='topbar'>
           <div className='menu'>
-            
+            <button onClick={getTwoRandomArticles}></button>
           </div>
           <div className='article-titles'>
              <h1>{formatStrings(startingArticleTitle)} → {formatStrings(goalArticleTitle)}</h1>
@@ -71,10 +86,24 @@ useEffect(() => {
          
         </div>
       <div className='playing-area'>
-         <div className='sidebar'><button onClick={getTwoRandomArticles}></button></div>
+         <div className='sidebar'>
+          <div className="sidebar-history">
+            test
+          </div>
+          
+          <div className='sidebar-footer'>
+            <div className='timer'>
+            test
+          </div>
+          <div className='click-counter'>
+            Clicks : {clickCount}
+          </div>
+          </div>
+          
+         </div>
       <div className='wiki-container'>
        
-      <Article title ={startingArticleTitle} onNavigate={setStartingArticleTitle}></Article>
+      <Article title ={startingArticleTitle} onNavigate={setStartingArticleTitle} onLinkClick={() => setClickCount(clickCount+1)}></Article>
       </div>
       </div>
      

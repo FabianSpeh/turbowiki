@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react"
 import './Article.css'
 
-function Article({title, onNavigate}) {
+function Article({title, onNavigate, onLinkClick}) {
 
 
 async function getWikipediaContent(title) {
@@ -13,7 +13,7 @@ async function getWikipediaContent(title) {
 }
 
 
-
+let clicks = 0
 const [articleHtml, setArticleHtml] = useState("")
 const [isLoading, setIsLoading] = useState(false)
 
@@ -41,8 +41,9 @@ useEffect(() => {
         if (href && href.startsWith("/wiki/")){
             event.preventDefault();
             const newTitle = decodeURIComponent(href.replace("/wiki/",""))
+            
             onNavigate(newTitle)
-           
+            onLinkClick()
 
         }
 
