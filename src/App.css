@@ -11,18 +11,34 @@ html,body,#root {
 .topbar{
   display: flex;
   flex-direction: row;
+  
+  background-color: #f2f2f2;
+  
+}
+
+.topbar-right {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
 }
 
 
 
 .menu {
   flex: 0.33;
-  border: 5px solid yellow;
+  
 }
 
 .article-titles{
   flex: 1;
-  border: 5px solid orange
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 160px;
+  padding: 16px;
+  
+  
+  
 }
 
 .main-screen{
@@ -37,9 +53,11 @@ html,body,#root {
   display: flex;
   flex-direction: row;
 }
-
+.current-article-title{
+  font-size: 30px;
+}
 .sidebar{
-  border: 5px solid red;
+  background-color: #f4f4f4;
   height: 100%;
   width: 100%;
   flex: 0.33;
@@ -53,13 +71,19 @@ html,body,#root {
   display: flex;
   flex-direction: row;
   flex: 0.2;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: start;
-  padding-bottom: 96px;
+  padding-bottom: 48px;
+  padding-top: 0px;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .sidebar-history{
 flex: 1;
+padding: 16px;
+padding-left: 32px;
+
 }
 
 .wiki-container {

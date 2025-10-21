@@ -1,7 +1,7 @@
 .wiki-content{
 text-align: start;
 padding: 32px;
-border: 2px solid;
+
 overflow: scroll;
 height: 100vh;
 }

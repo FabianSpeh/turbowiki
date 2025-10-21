@@ -26,6 +26,7 @@ function App() {
   const [currentArticle, setCurrentArticle] = useState("")
   const [goalArticleTitle, setGoalArticleTitle] = useState("")
   const [gameWon, setGameWon] = useState(false)
+  const [articleHistory, setArticleHistory] = useState([])
   
 //   async function getRandomStartingArticle(){
 //     const randomArticle = await fetch("http://localhost:5000/article/random")
@@ -82,27 +83,36 @@ useEffect(() => {
           </div>
           <div className='article-titles'>
              <h1>{formatStrings(startingArticleTitle)} → {formatStrings(goalArticleTitle)}</h1>
+             <div className="topbar-right">
+               <h1 className='timer'>
+            00:00:00
+          </h1>
+          <h1>|</h1>
+          <h1 className='click-counter'>
+            CLICKS : {clickCount}
+          </h1> 
+             </div>
+             
           </div>
          
         </div>
       <div className='playing-area'>
          <div className='sidebar'>
           <div className="sidebar-history">
-            test
+            <h3>History</h3>
+            <h4>Article</h4>
+            
           </div>
           
           <div className='sidebar-footer'>
-            <div className='timer'>
-            test
-          </div>
-          <div className='click-counter'>
-            Clicks : {clickCount}
-          </div>
+           
           </div>
           
          </div>
       <div className='wiki-container'>
+      <div className='current-article-title'>
        
+      </div>
       <Article title ={startingArticleTitle} onNavigate={setStartingArticleTitle} onLinkClick={() => setClickCount(clickCount+1)}></Article>
       </div>
       </div>
