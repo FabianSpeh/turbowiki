@@ -4,11 +4,13 @@
   padding: 2rem;
   
 }
-.wiki-content{
-text-align: start;
+.wiki-container{
+
 }
-.wiki-content .mw-editsection {
-  display: none
+
+.sidebar{
+  border: 2px red;
+  height: 100%
 }
 .logo {
   height: 6em;

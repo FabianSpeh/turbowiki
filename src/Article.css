@@ -1,5 +1,7 @@
 .wiki-content{
 text-align: start;
+padding: 32px;
+border: 2px solid;
 }
 .wiki-content .mw-editsection {
   display: none
