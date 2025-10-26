@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react"
 import './Article.css'
 
-function Article({title, onNavigate, onLinkClick}) {
+function Article({title, onNavigate, onLinkClick, onHistoryAdd}) {
 
 
 async function getWikipediaContent(title) {
@@ -43,7 +43,7 @@ useEffect(() => {
             const newTitle = decodeURIComponent(href.replace("/wiki/",""))
             
             onNavigate(newTitle)
-            onLinkClick()
+            onHistoryAdd(newTitle)
 
         }
 

@@ -22,12 +22,12 @@ function App() {
     return () => window.removeEventListener("resize", setViewportHeight);
   }, []);
   const [clickCount, setClickCount] = useState(0)
-  const [searchTerm, setSearchTerm] = useState("")
   const [startingArticleTitle, setStartingArticleTitle] = useState("")
   const [currentArticle, setCurrentArticle] = useState("")
   const [goalArticleTitle, setGoalArticleTitle] = useState("")
   const [gameWon, setGameWon] = useState(false)
   const [articleHistory, setArticleHistory] = useState([])
+  const [currentTime, getCurrentTime] = useState([])
   
 //   async function getRandomStartingArticle(){
 //     const randomArticle = await fetch("http://localhost:5000/article/random")
@@ -42,6 +42,14 @@ function App() {
     
 // }
 
+
+function addToHistory(title) {
+  const entry = { title};
+  setArticleHistory(prev => [...prev, entry]);
+  console.log(articleHistory)
+}
+
+// fetches 2 random articles as starting and goal article
 async function getTwoRandomArticles(){
   const randomArticle1 = await fetch("http://localhost:5000/article/random")
     const title1 = await randomArticle1.text()
@@ -60,11 +68,7 @@ function formatStrings(title){
 
 // every time the article changes, it checks for equality to see if the player has won
 useEffect(() => {
-  setArticleHistory([
-    {article: startingArticleTitle},
-    ...articleHistory
-  ])
-  console.log(articleHistory)
+ 
   if (startingArticleTitle && startingArticleTitle === goalArticleTitle) {
     
     setGameWon(true);
@@ -100,6 +104,13 @@ useEffect(() => {
           <div className="sidebar-history">
             <h3>History</h3>
             <h4>Article</h4>
+            <ul>
+            {articleHistory.map((item, i) => (
+              <li key={i}>
+                <span>{formatStrings(item.title)}</span>
+              </li>
+            ))}
+            </ul>
             
           </div>
           
@@ -111,7 +122,7 @@ useEffect(() => {
           </h1> 
             <h1>|</h1>
              <h1 className='timer'>
-            <Timer></Timer>
+            <Timer ></Timer>
           </h1>
           </div>
           
@@ -120,7 +131,7 @@ useEffect(() => {
       <div className='current-article-title'>
        
       </div>
-      <Article title ={startingArticleTitle} onNavigate={setStartingArticleTitle} onLinkClick={() => setClickCount(clickCount+1)}></Article>
+      <Article title ={startingArticleTitle} onNavigate={setStartingArticleTitle} onLinkClick={() => setClickCount(clickCount+1)} onHistoryAdd={addToHistory}></Article>
       </div>
       </div>
      
