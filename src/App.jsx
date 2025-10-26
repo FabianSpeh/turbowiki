@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Article from './Article'
+import Timer from './Timer'
 
 
 
@@ -59,7 +60,11 @@ function formatStrings(title){
 
 // every time the article changes, it checks for equality to see if the player has won
 useEffect(() => {
-  
+  setArticleHistory([
+    {article: startingArticleTitle},
+    ...articleHistory
+  ])
+  console.log(articleHistory)
   if (startingArticleTitle && startingArticleTitle === goalArticleTitle) {
     
     setGameWon(true);
@@ -84,13 +89,7 @@ useEffect(() => {
           <div className='article-titles'>
              <h1>{formatStrings(startingArticleTitle)} → {formatStrings(goalArticleTitle)}</h1>
              <div className="topbar-right">
-               <h1 className='timer'>
-            00:00:00
-          </h1>
-          <h1>|</h1>
-          <h1 className='click-counter'>
-            CLICKS : {clickCount}
-          </h1> 
+             
              </div>
              
           </div>
@@ -105,7 +104,15 @@ useEffect(() => {
           </div>
           
           <div className='sidebar-footer'>
-           
+          
+        
+          <h1 className='click-counter'>
+            CLICKS : {clickCount}
+          </h1> 
+            <h1>|</h1>
+             <h1 className='timer'>
+            <Timer></Timer>
+          </h1>
           </div>
           
          </div>
